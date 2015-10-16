@@ -7,3 +7,4 @@
 //
 
 #import <MiniPin/PDKClient.h>
+#import <MiniPin/PDKPin.h>

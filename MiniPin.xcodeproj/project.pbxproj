@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		432808D41BD185DD00D9296A /* MiniPin.h in Headers */ = {isa = PBXBuildFile; fileRef = 432808D31BD185DD00D9296A /* MiniPin.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		432808E11BD1869C00D9296A /* PDKPin.h in Headers */ = {isa = PBXBuildFile; fileRef = 432808DF1BD1869C00D9296A /* PDKPin.h */; };
+		432808E11BD1869C00D9296A /* PDKPin.h in Headers */ = {isa = PBXBuildFile; fileRef = 432808DF1BD1869C00D9296A /* PDKPin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		432808E21BD1869C00D9296A /* PDKPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 432808E01BD1869C00D9296A /* PDKPin.m */; };
 		432809121BD1876A00D9296A /* PDKCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 432809101BD1876A00D9296A /* PDKCategories.h */; };
 		432809131BD1876A00D9296A /* PDKCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 432809111BD1876A00D9296A /* PDKCategories.m */; };
-		432809161BD1881800D9296A /* PDKClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 432809141BD1881800D9296A /* PDKClient.h */; };
+		432809161BD1881800D9296A /* PDKClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 432809141BD1881800D9296A /* PDKClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		432809171BD1881800D9296A /* PDKClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 432809151BD1881800D9296A /* PDKClient.m */; };
 /* End PBXBuildFile section */
 
