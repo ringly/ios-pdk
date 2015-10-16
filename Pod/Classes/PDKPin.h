@@ -39,13 +39,12 @@ typedef void (^PDKUnauthPinCreationFailure)(NSError *error);
  *  @param successBlock Called when the API call succeeds
  *  @param failureBlock Called when the API call fails
  */
-+ (void)pinWithAppID:(NSString*)appID
-            imageURL:(NSURL *)imageURL
-                link:(NSURL *)sourceURL
-  suggestedBoardName:(NSString *)suggestedBoardName
-                note:(NSString *)pinDescription
-         withSuccess:(PDKUnauthPinCreationSuccess)pinSuccessBlock
-          andFailure:(PDKUnauthPinCreationFailure)pinFailureBlock;
++ (void)pinWithImageURL:(NSURL *)imageURL
+                   link:(NSURL *)sourceURL
+     suggestedBoardName:(NSString *)suggestedBoardName
+                   note:(NSString *)pinDescription
+            withSuccess:(PDKUnauthPinCreationSuccess)pinSuccessBlock
+             andFailure:(PDKUnauthPinCreationFailure)pinFailureBlock;
 
 /**
  *  Used internally in PDKClient's handleURL: to handle the unauth flow.

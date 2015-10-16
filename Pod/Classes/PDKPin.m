@@ -4,6 +4,7 @@
 @import UIKit;
 
 #import "PDKCategories.h"
+#import "PDKClient.h"
 #import "PDKPin.h"
 
 @implementation PDKPin
@@ -44,22 +45,21 @@ static NSString * const kPDKPinterestAppPinItURLString = @"pinterestsdk.v1://pin
     _pinFailureBlock = [pinFailureBlock copy];
 }
 
-+ (void)pinWithAppID:(NSString *)appID
-            imageURL:(NSURL *)imageURL
-                link:(NSURL *)sourceURL
-  suggestedBoardName:(NSString *)suggestedBoardName
-                note:(NSString *)pinDescription
-         withSuccess:(PDKUnauthPinCreationSuccess)pinSuccessBlock
-          andFailure:(PDKUnauthPinCreationFailure)pinFailureBlock
++ (void)pinWithImageURL:(NSURL *)imageURL
+                   link:(NSURL *)sourceURL
+     suggestedBoardName:(NSString *)suggestedBoardName
+                   note:(NSString *)pinDescription
+            withSuccess:(PDKUnauthPinCreationSuccess)pinSuccessBlock
+             andFailure:(PDKUnauthPinCreationFailure)pinFailureBlock
 {
     
-    self.clientRedirectURLString = [NSString stringWithFormat:@"pdk%@", appID];
+    self.clientRedirectURLString = [NSString stringWithFormat:@"pdk%@", [PDKClient sharedInstance].appId];
     self.pinSuccessBlock = pinSuccessBlock;
     self.pinFailureBlock = pinFailureBlock;
     
     NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
     
-    NSDictionary *params = @{@"client_id" : appID,
+    NSDictionary *params = @{@"client_id" : [PDKClient sharedInstance].appId,
                              @"image_url" : [imageURL absoluteString],
                              @"source_url" : [sourceURL absoluteString],
                              @"app_name" : appName,
