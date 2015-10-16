@@ -1,26 +1,10 @@
 //  Copyright (c) 2015 Pinterest. All rights reserved.
 //  Created by Ricky Cancro on 1/28/15.
 
-#import "PDKPin.h"
+@import UIKit;
 
-#import "PDKBoard.h"
 #import "PDKCategories.h"
-#import "PDKImageInfo.h"
-#import "PDKUser.h"
-
-@interface PDKPin()
-@property (nonatomic, copy, readwrite) NSURL *url;
-@property (nonatomic, copy, readwrite) NSString *descriptionText;
-
-@property (nonatomic, strong, readwrite) PDKBoard *board;
-@property (nonatomic, strong, readwrite) PDKUser *creator;
-@property (nonatomic, strong, readwrite) NSDictionary *metaData;
-
-@property (nonatomic, assign, readwrite) NSUInteger repins;
-@property (nonatomic, assign, readwrite) NSUInteger likes;
-@property (nonatomic, assign, readwrite) NSUInteger comments;
-
-@end
+#import "PDKPin.h"
 
 @implementation PDKPin
 
@@ -29,28 +13,6 @@ static PDKUnauthPinCreationSuccess _pinSuccessBlock = NULL;
 static PDKUnauthPinCreationFailure _pinFailureBlock = NULL;
 
 static NSString * const kPDKPinterestAppPinItURLString = @"pinterestsdk.v1://pinit/";
-
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary
-{
-    self = [super initWithDictionary:dictionary];
-    if (self) {
-        _url = [NSURL URLWithString:dictionary[@"link"]];
-        _descriptionText = dictionary[@"note"];
-        _board = [PDKBoard boardFromDictionary:dictionary[@"board"]];
-        _creator = [PDKUser userFromDictionary:dictionary[@"creator"]];
-        _metaData = dictionary[@"metadata"];
-        
-        _repins = [self.counts[@"repins"] unsignedIntegerValue];
-        _likes = [self.counts[@"likes"] unsignedIntegerValue];
-        _comments = [self.counts[@"comments"] unsignedIntegerValue];
-    }
-    return self;
-}
-
-+ (instancetype)pinFromDictionary:(NSDictionary *)dictionary
-{
-    return [[PDKPin alloc] initWithDictionary:dictionary];
-}
 
 + (NSString *)clientRedirectURLString
 {
@@ -82,21 +44,22 @@ static NSString * const kPDKPinterestAppPinItURLString = @"pinterestsdk.v1://pin
     _pinFailureBlock = [pinFailureBlock copy];
 }
 
-+ (void)pinWithImageURL:(NSURL *)imageURL
-                   link:(NSURL *)sourceURL
-     suggestedBoardName:(NSString *)suggestedBoardName
-                   note:(NSString *)pinDescription
-            withSuccess:(PDKUnauthPinCreationSuccess)pinSuccessBlock
-             andFailure:(PDKUnauthPinCreationFailure)pinFailureBlock
++ (void)pinWithAppID:(NSString *)appID
+            imageURL:(NSURL *)imageURL
+                link:(NSURL *)sourceURL
+  suggestedBoardName:(NSString *)suggestedBoardName
+                note:(NSString *)pinDescription
+         withSuccess:(PDKUnauthPinCreationSuccess)pinSuccessBlock
+          andFailure:(PDKUnauthPinCreationFailure)pinFailureBlock
 {
     
-    self.clientRedirectURLString = [NSString stringWithFormat:@"pdk%@", [PDKClient sharedInstance].appId];
+    self.clientRedirectURLString = [NSString stringWithFormat:@"pdk%@", appID];
     self.pinSuccessBlock = pinSuccessBlock;
     self.pinFailureBlock = pinFailureBlock;
     
     NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
     
-    NSDictionary *params = @{@"client_id" : [PDKClient sharedInstance].appId,
+    NSDictionary *params = @{@"client_id" : appID,
                              @"image_url" : [imageURL absoluteString],
                              @"source_url" : [sourceURL absoluteString],
                              @"app_name" : appName,
