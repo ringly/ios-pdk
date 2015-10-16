@@ -9,21 +9,10 @@
 
 @implementation PDKPin
 
-static NSString *_clientRedirectURLString = nil;
 static PDKUnauthPinCreationSuccess _pinSuccessBlock = NULL;
 static PDKUnauthPinCreationFailure _pinFailureBlock = NULL;
 
 static NSString * const kPDKPinterestAppPinItURLString = @"pinterestsdk.v1://pinit/";
-
-+ (NSString *)clientRedirectURLString
-{
-    return _clientRedirectURLString;
-}
-
-+ (void)setClientRedirectURLString:(NSString *)clientRedirectURLString
-{
-    _clientRedirectURLString = clientRedirectURLString;
-}
 
 + (PDKUnauthPinCreationSuccess)pinSuccessBlock
 {
@@ -52,8 +41,6 @@ static NSString * const kPDKPinterestAppPinItURLString = @"pinterestsdk.v1://pin
             withSuccess:(PDKUnauthPinCreationSuccess)pinSuccessBlock
              andFailure:(PDKUnauthPinCreationFailure)pinFailureBlock
 {
-    
-    self.clientRedirectURLString = [NSString stringWithFormat:@"pdk%@", [PDKClient sharedInstance].appId];
     self.pinSuccessBlock = pinSuccessBlock;
     self.pinFailureBlock = pinFailureBlock;
     
