@@ -13,7 +13,6 @@
 @property (nonatomic, assign) BOOL configured;
 @property (nonatomic, copy, readwrite) NSString *appId;
 @property (nonatomic, copy) NSString *clientRedirectURLString;
-@property (nonatomic, copy) NSString *oauthToken;
 @property (nonatomic, assign, readwrite) BOOL authorized;
 
 @end
